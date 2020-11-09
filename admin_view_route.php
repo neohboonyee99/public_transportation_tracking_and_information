@@ -5,28 +5,28 @@
     if (isset($_POST['btn_delete_route'])){
         if (isset($_POST['route_number'])){
             $routeNumber = $_POST['route_number'];
-
+            echo "<script>alert(".$routeNumber.")</script>";
 
             $delete = $db->deleteBusRoute($routeNumber);
 
             if($delete){
-                header('Location: '.$_SERVER['PHP_SELF']);  
+                echo "<script>alert('Successful to delete bus route!')</script>";
                 
             }
             else{
-                echo "<script>alert('Unsuccessful to delete bus route!')";
-                header('Location: '.$_SERVER['PHP_SELF']);  
+                echo "<script>alert('Unsuccessful to delete bus route!')</script>";
+                
                 
             }
         }
         else{
-            echo "<script>alert('Unsuccessful to delete bus route!')";
-            header('Location: '.$_SERVER['PHP_SELF']);  
+            echo "<script>alert('Unsuccessful to delete bus route!')</script>";
+            
         }
         
         
     }
-    else {
+
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -70,17 +70,12 @@
         <header class="topbar" data-navbarbg="skin5">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
-                    <!-- toggle and nav items -->
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                <h1 style="background-color: #2f323e;
+                            margin : 0px;
+                            color: #ffff;
+                            padding-left: 20px;">Track-IT</h1>
                 </div>
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                    <ul class="navbar-nav d-none d-md-block d-lg-none">
-                        <li class="nav-item">
-                            <a class="nav-toggler nav-link waves-effect waves-light text-white"
-                                href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                        </li>
-                    </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
                     <!-- ============================================================== -->
@@ -166,43 +161,45 @@
 
                                         if($busRoute == NULL ){
                                             
-                                            echo "<td><p>No data can be found.</p></td>";
+                                            echo "<tr><td><p>No data can be found.</p></td></tr>";
+                                            echo '</tbody>';
                                         }
                                         else {
                                             foreach ($busRoute as $key => $value){
                                                 echo '
+                                                <tr>
                                                 <td>'.$value['route_number']. '</td>
                                                 <td>'.$value['start_stop'].'</td>
                                                 <td>'.$value['back_stop'].'</td>
-                                                <form action ="admin_edit_route.php" method="post">
+                                                <td><form action ="admin_edit_route.php" method="post">
                                                     <input type="hidden" name="routeNumber" value="'.$value['route_number'].'"</input>
-                                                    <td><input name ="submit_view_route_details" type="submit" class="btn btn-success" value="Edit"></input></td>
-                                                </form>
-                                                <td><button type="button" class="btn btn-danger" name="delete_route" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
-                                                <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                                                    <form action ="admin_view_route.php" method="post">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">Delete Bus Route</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <p>Are you sure you want to delete this bus route?</p>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <input type="hidden" name="route_number" value="'.$value['route_number'].'"</input>
-                                                                <input name="btn_delete_route" type="submit" class="btn btn-danger" value="Delete"></button>
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>  
-                                                    </div>
-                                                    </form>
-                                                </div>
-                                                </tbody>
-                                                    ';}
+                                                    <input name ="submit_view_route_details" type="submit" class="btn btn-success" value="Edit"></input>
+                                                </form></td>
+                                                <td><button type="button" class="btn btn-danger" name="delete_route" data-toggle="modal" data-target="#deleteModal'.$key.'">Delete</button>
+                                                <div id="deleteModal'.$key.'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Delete Bus Route</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>Are you sure you want to delete this bus route?</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form action ="admin_view_route.php" method="post">
+                                                                    <input type="hidden" name="route_number" value="'.$value['route_number'].'"</input>
+                                                                    <input name="btn_delete_route" type="submit" class="btn btn-danger" value="Delete"></button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>  
+                                                        </div>
+                                                    
+                                                </div></td></tr>';}
+                                            echo '</tbody>';
                                         }
                                        
                                     ?>
@@ -255,10 +252,8 @@
     <script src="js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.js"></script>
+   
 </body>
 
 </html>
-<?php
-    }
 
-?>

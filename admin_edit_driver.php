@@ -48,8 +48,10 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
                     <!-- toggle and nav items -->
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <h1 style="background-color: #2f323e;
+                            margin : 0px;
+                            color: #ffff;
+                            padding-left: 20px;">Track-IT</h1>
                 </div>
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                     <ul class="navbar-nav d-none d-md-block d-lg-none">
@@ -162,6 +164,16 @@
                                             ?>required class="form-control p-0 border-0"> 
                                         </div>
                                     </div>
+
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-12 p-0 text-warning">Bus Plate Number</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <input name="bus_plate_number" type="text" placeholder="Example: PMP1122" 
+                                            <?php 
+                                                echo 'value="'.$driverDetails['bus_plate_number'].'"';
+                                            ?> required class="form-control p-0 border-0"> 
+                                        </div>
+                                    </div>
                                     <div class="form-group mb-4">
                                         <div class="col-sm-12">
                                             <button type="submit" name="submit_edit_driver" class="btn btn-success">Edit Driver Details</button>
@@ -226,21 +238,22 @@
 <?php
         }
         else if(isset($_POST['submit_edit_driver'])){
-            if (isset($_POST['driver_name']) && isset($_POST['driver_ic']) && isset($_POST['driver_bus_route'])){
+            if (isset($_POST['driver_name']) && isset($_POST['driver_ic']) && isset($_POST['driver_bus_route']) && isset($_POST['bus_plate_number'])){
                 $driverName = $_POST['driver_name'];
                 $driverIC = (int)$_POST['driver_ic'];
                 $driverBusRoute = $_POST['driver_bus_route'];
+                $busPlateNumber = $_POST['bus_plate_number'];
 
                 $icPattern = "/^[0-9]{12}$/";
 
-                if (!empty($driverName) && !empty($driverIC) && !empty($driverBusRoute)){
+                if ( !empty($driverName) && !empty($driverIC) && !empty($driverBusRoute) && !empty($busPlateNumber)){
                     if(!preg_match($icPattern, $driverIC)){
                         echo "<script>alert('Please enter IC Number in correct format! Please try again')</script>"; 
                     }
 
 
                     else{
-                        $driver = $db->editBusDriver($driverName,$driverIC,$driverBusRoute);
+                        $driver = $db->editBusDriver($driverName,$driverIC,$driverBusRoute,$busPlateNumber);
 
                         if ($driver){
                             echo "<script>alert('Successfully edit driver details')</script>";

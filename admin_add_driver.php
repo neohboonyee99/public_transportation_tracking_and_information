@@ -2,20 +2,21 @@
     require "DB_Functions.php";
     $db = new DB_Functions();
 
-    if(isset($_POST['submit_add_driver'])){
-        if(isset($_POST['driver_name']) && isset($_POST['driver_ic']) && isset($_POST['route_number']) && isset($_POST['driver_login_id']) && isset($_POST['driver_login_password']) && isset($_POST['confirm_password']) && )
+    if( isset($_POST['submit_add_driver']) ){
+        
         $driverName = $_POST['driver_name'];
         $driverIC = (int)$_POST['driver_ic'];
         $driverBusRoute = $_POST['route_number'];
         $driverLoginId = $_POST['driver_login_id'];
         $driverLoginPassword = $_POST['driver_login_password'];
         $confirmPassword = $_POST['confirm_password'];
+        $busPlateNumber = $_POST['bus_plate_number'];
 
         $usernamePattern = "/^[0-9a-zA-Z]{8,24}$/";
         $passwordPattern = "/^.{8,255}$/";
         $icPattern = "/^[0-9]{12}$/";
 
-        if (!empty($driverName) && !empty($driverIC) && !empty($driverBusRoute) && !empty($driverLoginId) && !empty($driverLoginPassword) && !empty($confirmPassword)){
+        if (!empty($driverName) && !empty($driverIC) && !empty($driverBusRoute) && !empty($driverLoginId) && !empty($driverLoginPassword) && !empty($confirmPassword) && !empty($busPlateNumber)){
             if(!preg_match($icPattern, $driverIC)){
                 echo "<script>alert('Please enter IC Number in correct format! Please try again')</script>"; 
                 echo "<script type='text/javascript'>location.href = 'admin_add_driver.php';</script>";
@@ -47,7 +48,7 @@
                 }
                 else{
                     $passwordHash = password_hash($driverLoginPassword, PASSWORD_DEFAULT);
-                    $driver = $db->addNewDriver($driverName,$driverIC,$driverBusRoute,$driverLoginId,$passwordHash);
+                    $driver = $db->addNewDriver($driverName,$driverIC,$driverBusRoute,$driverLoginId,$passwordHash,$busPlateNumber);
 
                     if ($driver){
                         echo "<script>alert('Successfully added driver')</script>";
@@ -112,8 +113,10 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
                     <!-- toggle and nav items -->
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <h1 style="background-color: #2f323e;
+                            margin : 0px;
+                            color: #ffff;
+                            padding-left: 20px;">Track-IT</h1>
                 </div>
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                     <ul class="navbar-nav d-none d-md-block d-lg-none">
@@ -244,6 +247,12 @@
 
                                                 ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-12 p-0 text-warning">Bus Plate Number</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <input name="bus_plate_number" type="text" placeholder="Example: PMP 1122" required class="form-control p-0 border-0"> 
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">

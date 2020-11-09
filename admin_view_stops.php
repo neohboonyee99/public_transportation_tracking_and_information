@@ -6,28 +6,23 @@
         if (isset($_POST['stops_name'])){
             $stopName = $_POST['stops_name'];
 
-
             $delete = $db->deleteBusStop($stopName);
 
             if($delete){
-                header('Location: '.$_SERVER['PHP_SELF']);  
+                echo "<script>alert('Successful to delete bus stop!')</script>"; 
                 
             }
             else{
-                echo "<script>alert('Unsuccessful to delete bus stop!')";
-                header('Location: '.$_SERVER['PHP_SELF']);  
+                echo "<script>alert('Unsuccessful to delete bus stop!')</script>"; 
                 
             }
         }
         else{
-            echo "<script>alert('Unsuccessful to delete bus stop!')";
-            header('Location: '.$_SERVER['PHP_SELF']);  
+            echo "<script>alert('Unsuccessful to delete bus stop!')</script>";
         }
         
         
     }
-    else {
-    
 ?>
 
 <!DOCTYPE html>
@@ -73,8 +68,10 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
                     <!-- toggle and nav items -->
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <h1 style="background-color: #2f323e;
+                            margin : 0px;
+                            color: #ffff;
+                            padding-left: 20px;">Track-IT</h1>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -169,17 +166,18 @@
                                             $busStop = $db->getBusStops();
 
                                             if($busStop == NULL ){
-                                            
-                                                echo "<td><p>No data can be found.</p></td>";
+                                                
+                                                echo "<tr><td><p>No data can be found.</p></td></tr></tbody>";
                                             }
                                             else{
                                                 foreach ($busStop as $key => $value){
                                                     echo '
+                                                    <tr>
                                                     <td>'.$value['name']. '</td>
                                                     <td>'.$value['latitude'].'</td>
                                                     <td>'.$value['longitude'].'</td>
-                                                    <td><button type="button" class="btn btn-danger" name="delete_route" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
-                                                    <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <td><button type="button" class="btn btn-danger" name="delete_route" data-toggle="modal" data-target="#deleteModal'.$key.'">Delete</button>
+                                                    <div id="deleteModal'.$key.'" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                                                         <form action ="admin_view_stops.php" method="post">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
@@ -200,9 +198,10 @@
                                                             </div>  
                                                         </div>
                                                         </form>
-                                                    </div>
-                                                    </tbody>
+                                                    </div></td></tr>
+                                                    
                                                         ';}
+                                                    echo '</tbody>';
                                             }
                                             
                                         ?>
@@ -260,5 +259,3 @@
 </body>
 
 </html>
-<?php
-    }

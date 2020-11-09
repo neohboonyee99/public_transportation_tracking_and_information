@@ -1,14 +1,325 @@
 <?php
+    require "config.php";
     require "DB_Functions.php";
     $db = new DB_Functions();
 
-    if (isset($_POST['submit_view_route_details'])){
-        if (isset($_POST['routeNumber'])){
-            $routeNumber = $_POST['routeNumber'];
-            $routeDetails = $db->getRouteDetailsByRouteNumber($routeNumber);
+    if(isset($_POST['submit_edit_route'])){
+        if (isset($_POST['routeNumber']) && isset($_POST['start_stop']) && isset($_POST['back_stop']) && isset($_POST['1st_stop_start']) && isset($_POST['2nd_stop_start'])&& isset($_POST['3rd_stop_start'])&& isset($_POST['4th_stop_start'])&& isset($_POST['5th_stop_start'])&& isset($_POST['6th_stop_start'])&& isset($_POST['7th_stop_start'])&& isset($_POST['8th_stop_start'])&& isset($_POST['9th_stop_start'])&& isset($_POST['10th_stop_start'])&& isset($_POST['11th_stop_start'])&& isset($_POST['12th_stop_start'])&& isset($_POST['13th_stop_start'])&& isset($_POST['14th_stop_start'])&& isset($_POST['15th_stop_start'])&& isset($_POST['16th_stop_start'])&& isset($_POST['17th_stop_start'])&& isset($_POST['18th_stop_start'])&& isset($_POST['19th_stop_start']) && isset($_POST['20th_stop_start']) && isset($_POST['1st_stop_back']) && isset($_POST['2nd_stop_back']) && isset($_POST['3rd_stop_back']) && isset($_POST['4th_stop_back']) && isset($_POST['5th_stop_back']) && isset($_POST['6th_stop_back']) && isset($_POST['7th_stop_back']) && isset($_POST['8th_stop_back']) && isset($_POST['9th_stop_back']) && isset($_POST['10th_stop_back']) && isset($_POST['11th_stop_back']) && isset($_POST['12th_stop_back']) && isset($_POST['13th_stop_back']) && isset($_POST['14th_stop_back']) && isset($_POST['15th_stop_back']) && isset($_POST['16th_stop_back']) && isset($_POST['17th_stop_back']) && isset($_POST['18th_stop_back']) && isset($_POST['19th_stop_back']) && isset($_POST['20th_stop_back'])){
 
+            $routeNumber = $_POST['routeNumber'];
+            $startStop = $_POST['start_stop'];
+            $backStop = $_POST['back_stop'];
+            
+            if( $_POST['1st_stop_start'] !="0"){
+                $startStop1st = $_POST['1st_stop_start'];
+        
+            }
+            else{
+                $startStop1st = NULL;
+            }
+    
+            if($_POST['2nd_stop_start'] !="0"){
+                $startStop2nd = $_POST['2nd_stop_start'];
+            }
+            else{
+                $startStop2nd = NULL;
+            }
+            if($_POST['3rd_stop_start']!="0"){
+                $startStop3rd = $_POST['3rd_stop_start'];
+            }
+            else{
+                $startStop3rd = NULL;
+            }
+            if($_POST['4th_stop_start']!="0"){
+                $startStop4th = $_POST['4th_stop_start'];
+            }
+            else{
+                $startStop4th = NULL;
+            }
+            if($_POST['5th_stop_start']!="0"){
+                $startStop5th = $_POST['5th_stop_start'];
+            }
+            else{
+                $startStop5th = NULL;
+            }
+            if($_POST['6th_stop_start']!="0"){
+                $startStop6th = $_POST['6th_stop_start'];
+            }
+            else{
+                $startStop6th = NULL;
+            }
+            if($_POST['7th_stop_start']!="0"){
+                $startStop7th = $_POST['7th_stop_start'];
+            }
+            else{
+                $startStop7th = NULL;
+            }
+            if($_POST['8th_stop_start']!="0"){
+                $startStop8th = $_POST['8th_stop_start'];
+            }
+            else{
+                $startStop8th = NULL;
+            }
+            if($_POST['9th_stop_start']!="0"){
+                $startStop9th = $_POST['9th_stop_start'];
+            }
+            else{
+                $startStop9th = NULL;
+            }
+
+            if($_POST['10th_stop_start']!="0"){
+                $startStop10th = $_POST['10th_stop_start'];
+            }
+            else{
+                $startStop10th = NULL;
+            }
+            if($_POST['11th_stop_start']!="0"){
+                $startStop11th = $_POST['11th_stop_start'];
+            }
+            else{
+                $startStop11th = NULL;
+            }
+            if($_POST['12th_stop_start']!="0"){
+                $startStop12th = $_POST['12th_stop_start'];
+            }
+            else{
+                $startStop12th = NULL;
+            }
+            if($_POST['13th_stop_start']!="0"){
+                $startStop13th = $_POST['13th_stop_start'];
+            }
+            else{
+                $startStop13th = NULL;
+            }
+            if($_POST['14th_stop_start']!="0"){
+                $startStop14th = $_POST['14th_stop_start'];
+            }
+            else{
+                $startStop14th = NULL;
+            }
+            if($_POST['15th_stop_start']!="0"){
+                $startStop15th = $_POST['15th_stop_start'];
+            }
+            else{
+                $startStop15th = NULL;
+            }
+            if($_POST['16th_stop_start']!="0"){
+                $startStop16th = $_POST['16th_stop_start'];
+            }
+            else{
+                $startStop16th = NULL;
+            }
+            if($_POST['17th_stop_start']!="0"){
+                $startStop17th = $_POST['17th_stop_start'];
+            }
+            else{
+                $startStop17th = NULL;
+            }
+            if($_POST['18th_stop_start']!="0"){
+                $startStop18th = $_POST['18th_stop_start'];
+            }
+            else{
+                $startStop18th = NULL;
+            }
+            if($_POST['19th_stop_start']!="0"){
+                $startStop19th = $_POST['19th_stop_start'];
+            }
+            else{
+                $startStop19th = NULL;
+            }
+            if($_POST['20th_stop_start']!="0"){
+                $startStop20th = $_POST['20th_stop_start'];
+            }
+            else{
+                $startStop20th = NULL;
+            }
+            if($_POST['1st_stop_back']!="0"){
+                $backStop1st = $_POST['1st_stop_back'];
+            }
+            else{
+                $backStop1st = NULL;
+            }
+            if($_POST['2nd_stop_back']!="0"){
+                $backStop2nd = $_POST['2nd_stop_back'];
+            }
+            else{
+                $backStop2nd = NULL;
+            }
+            if($_POST['3rd_stop_back']!="0"){
+                $backStop3rd = $_POST['3rd_stop_back'];
+            }
+            else{
+                $backStop3rd = NULL;
+            }
+            if($_POST['4th_stop_back']!="0"){
+                $backStop4th = $_POST['4th_stop_back'];
+            }
+            else{
+                $backStop4th = NULL;
+            }
+            if($_POST['5th_stop_back']!="0"){
+                $backStop5th = $_POST['5th_stop_back'];
+            }
+            else{
+                $backStop5th = NULL;
+            }
+            if($_POST['6th_stop_back']!="0"){
+                $backStop6th = $_POST['6th_stop_back'];
+            }
+            else{
+                $backStop6th = NULL;
+            }
+            if($_POST['7th_stop_back']!="0"){
+                $backStop7th = $_POST['7th_stop_back'];
+            }
+            else{
+                $backStop7th = NULL;
+            }
+            if($_POST['8th_stop_back']!="0"){
+                $backStop8th = $_POST['8th_stop_back'];
+            }
+            else{
+                $backStop8th = NULL;
+            }
+            if($_POST['9th_stop_back']!="0"){
+                $backStop9th = $_POST['9th_stop_back'];
+            }
+            else{
+                $backStop9th = NULL;
+            }
+            if($_POST['10th_stop_back']!="0"){
+                $backStop10th = $_POST['10th_stop_back'];
+            }
+            else{
+                $backStop10th = NULL;
+            }
+            if($_POST['11th_stop_back']!="0"){
+                $backStop11th = $_POST['11th_stop_back'];
+            }
+            else{
+                $backStop11th = NULL;
+            }
+            if($_POST['12th_stop_back']!="0"){
+                $backStop12th = $_POST['12th_stop_back'];
+            }
+            else{
+                $backStop12th = NULL;
+            }
+            if($_POST['13th_stop_back']!="0"){
+                $backStop13th = $_POST['13th_stop_back'];
+            }
+            else{
+                $backStop13th = NULL;
+            }
+            if($_POST['14th_stop_back']!="0"){
+                $backStop14th = $_POST['14th_stop_back'];
+            }
+            else{
+                $backStop14th = NULL;
+            }
+            if($_POST['15th_stop_back']!="0"){
+                $backStop15th = $_POST['15th_stop_back'];
+            }
+            else{
+                $backStop15th = NULL;
+            }
+            if($_POST['16th_stop_back']!="0"){
+                $backStop16th = $_POST['16th_stop_back'];
+            }
+            else{
+                $backStop16th = NULL;
+            }
+            if($_POST['17th_stop_back']!="0"){
+                $backStop17th = $_POST['17th_stop_back'];
+            }
+            else{
+                $backStop17th = NULL;
+            }
+            if($_POST['18th_stop_back']!="0"){
+                $backStop18th = $_POST['18th_stop_back'];
+            }
+            else{
+                $backStop18th = NULL;
+            }
+            if($_POST['19th_stop_back']!="0"){
+                $backStop19th = $_POST['19th_stop_back'];
+            }
+            else{
+                $backStop19th = NULL;
+            }
+            if($_POST['20th_stop_back']!="0"){
+                $backStop20th = $_POST['20th_stop_back'];
+            }
+            else{
+                $backStop20th = NULL;
+            }
+
+            $stopUsedStart = array();
+            $stopUsedBack = array();
+            $filterStart = array();
+            $filterBack = array();
+            $checkRoute = false;
+            $checkStarting = false;
+
+            if (!empty($routeNumber) && !empty($startStop) && !empty($backStop)){
+                if ($startStop==$backStop){
+                    echo "<script>alert('Start Stop and Back Stop Starting Bus Stop Must Be Different!')</script>"; 
+                    $checkStarting = true;
+                }
+                if (!$checkStarting){
+                    array_push($stopUsedStart,$startStop,$startStop1st,$startStop2nd,$startStop3rd,$startStop4th,$startStop5th,$startStop6th,$startStop7th,$startStop8th,$startStop9th,$startStop10th,$startStop11th,$startStop12th,$startStop13th,$startStop14th,$startStop15th,$startStop16th,$startStop17th,$startStop18th,$startStop19th,$startStop20th);
+                
+                    array_push($stopUsedBack,$backStop,$backStop1st,$backStop2nd,$backStop3rd,$backStop4th,$backStop5th,$backStop6th,$backStop7th,$backStop8th,$backStop9th,$backStop10th,$backStop11th,$backStop12th,$backStop13th,$backStop14th,$backStop15th,$backStop16th,$backStop17th,$backStop18th,$backStop19th,$backStop20th);
+                    
+                    $filterStart = array_filter($stopUsedStart);
+                    $filterBack = array_filter($stopUsedBack);
+                    
+                    
+                    if(count(array_unique($filterStart)) < count($filterStart)){
+                        echo "<script>alert('Multiple duplicate stop selected! Please select different bus stops!')</script>"; 
+                        $checkRoute = true;
+                    }
+                    else if(count(array_unique($filterBack)) < count($filterBack)){
+                        echo "<script>alert('Multiple duplicate stop selected! Please select different bus stops!')</script>"; 
+                        $checkRoute = true;
+                    }
+
+                    if(!$checkRoute){
+                    
+                    
+                        $route = $db->editBusRoute($routeNumber,$startStop,$backStop,$startStop1st,$startStop2nd,$startStop3rd,$startStop4th,$startStop5th,$startStop6th,$startStop7th,$startStop8th,$startStop9th,$startStop10th,$startStop11th,$startStop12th,$startStop13th,$startStop14th,$startStop15th,$startStop16th,$startStop17th,$startStop18th,$startStop19th,$startStop20th,$backStop1st,$backStop2nd,$backStop3rd,$backStop4th,$backStop5th,$backStop6th,$backStop7th,$backStop8th,$backStop9th,$backStop10th,$backStop11th,$backStop12th,$backStop13th,$backStop14th,$backStop15th,$backStop16th,$backStop17th,$backStop18th,$backStop19th,$backStop20th);
+    
+                        if ($route){
+                            echo "<script>alert('Successfully edit route.')</script>";
+                            echo "<script type='text/javascript'>location.href = 'admin_view_route.php';</script>";
+
+                        }
+                    
+                        else 
+                        {
+                            echo "<script>alert('Unsuccessful to edit route.')</script>";             
+                        }
+                    }
+                }
+
+            }
+            else{
+                echo "<script>alert('Unsuccessful to edit route! Please fill in all the details!')</script>";                  
+            }
+            
         }
-        if ($routeDetails){
+
+        else{
+            echo "<script>alert('Unsuccessful to edit route.')</script>"; 
+        }
+    }
+
+    if (isset($_POST['routeNumber'])){
+        $routeNumber = $_POST['routeNumber'];
+        $routeDetails = $db->getRouteDetailsByRouteNumber($routeNumber);
+
+    }
+    if ($routeDetails){
 ?>
 
 <!DOCTYPE html>
@@ -54,8 +365,10 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
                     <!-- toggle and nav items -->
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <h1 style="background-color: #2f323e;
+                            margin : 0px;
+                            color: #ffff;
+                            padding-left: 20px;">Track-IT</h1>
                 </div>
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                     <ul class="navbar-nav d-none d-md-block d-lg-none">
@@ -141,14 +454,16 @@
                     <div class="col-lg-8 col-xlg-9 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="admin_add_route.php" class="form-horizontal form-material" method="post">
+                                <form action="admin_edit_route.php" class="form-horizontal form-material" method="post">
                                     <div class="form-group mb-4">
                                         <label class="col-md-12 p-0 text-warning">Bus Route Number</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input name="bus_route_number" type="text" placeholder="Example: 401E" class="form-control p-0 border-0" 
+                                            <p>
                                             <?php
-                                                echo 'value="'.$routeDetails['route_number'].'"'
-                                            ?>> 
+                                                echo $routeDetails['route_number'];
+                                                echo '<input type="hidden" name="routeNumber" value="'.$routeDetails['route_number'].'">';
+                                            ?></p>
+
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
@@ -983,7 +1298,7 @@
                                     
                                     <div class="form-group mb-4">
                                         <div class="col-sm-12">
-                                            <button type="submit" name="submit_add_route" class="btn btn-success">Add New Route</button>
+                                            <button type="submit" name="submit_edit_route" class="btn btn-success">Edit Route</button>
                                         </div>
                                     </div>
                                 </form>
@@ -1042,299 +1357,5 @@
 </html>
 
 <?php
-        }
-        else if(isset($_POST['submit_add_route'])){
-            if (isset($_POST['bus_route_number']) && isset($_POST['start_stop']) && isset($_POST['back_stop']) && isset($_POST['1st_stop_start']) && isset($_POST['2nd_stop_start'])&& isset($_POST['3rd_stop_start'])&& isset($_POST['4th_stop_start'])&& isset($_POST['5th_stop_start'])&& isset($_POST['6th_stop_start'])&& isset($_POST['7th_stop_start'])&& isset($_POST['8th_stop_start'])&& isset($_POST['9th_stop_start'])&& isset($_POST['10th_stop_start'])&& isset($_POST['11th_stop_start'])&& isset($_POST['12th_stop_start'])&& isset($_POST['13th_stop_start'])&& isset($_POST['14th_stop_start'])&& isset($_POST['15th_stop_start'])&& isset($_POST['16th_stop_start'])&& isset($_POST['17th_stop_start'])&& isset($_POST['18th_stop_start'])&& isset($_POST['19th_stop_start']) && isset($_POST['20th_stop_start']) && isset($_POST['1st_stop_back']) && isset($_POST['2nd_stop_back']) && isset($_POST['3rd_stop_back']) && isset($_POST['4th_stop_back']) && isset($_POST['5th_stop_back']) && isset($_POST['6th_stop_back']) && isset($_POST['7th_stop_back']) && isset($_POST['8th_stop_back']) && isset($_POST['9th_stop_back']) && isset($_POST['10th_stop_back']) && isset($_POST['11th_stop_back']) && isset($_POST['12th_stop_back']) && isset($_POST['13th_stop_back']) && isset($_POST['14th_stop_back']) && isset($_POST['15th_stop_back']) && isset($_POST['16th_stop_back']) && isset($_POST['17th_stop_back']) && isset($_POST['18th_stop_back']) && isset($_POST['19th_stop_back']) && isset($_POST['20th_stop_back'])){
-
-                $routeNumber = $_POST['bus_route_number'];
-                $startStop = $_POST['start_stop'];
-                $backStop = $_POST['back_stop'];
-                if($_POST['1st_stop_start'] !=0){
-                    $startStop1st = $_POST['1st_stop_start'];
-                }
-                else{
-                    $startStop1st = NULL;
-                }
-                if($_POST['2nd_stop_start'] !=0){
-                    $startStop2nd = $_POST['2nd_stop_start'];
-                }
-                else{
-                    $startStop2nd = NULL;
-                }
-                if($_POST['3rd_stop_start']!=0){
-                    $startStop3rd = $_POST['3rd_stop_start'];
-                }
-                else{
-                    $startStop3rd = NULL;
-                }
-                if($_POST['4th_stop_start']!=0){
-                    $startStop4th = $_POST['4th_stop_start'];
-                }
-                else{
-                    $startStop4th = NULL;
-                }
-                if($_POST['5th_stop_start']!=0){
-                    $startStop5th = $_POST['5th_stop_start'];
-                }
-                else{
-                    $startStop5th = NULL;
-                }
-                if($_POST['6th_stop_start']!=0){
-                    $startStop6th = $_POST['6th_stop_start'];
-                }
-                else{
-                    $startStop6th = NULL;
-                }
-                if($_POST['7th_stop_start']!=0){
-                    $startStop7th = $_POST['7th_stop_start'];
-                }
-                else{
-                    $startStop7th = NULL;
-                }
-                if($_POST['8th_stop_start']!=0){
-                    $startStop8th = $_POST['8th_stop_start'];
-                }
-                else{
-                    $startStop8th = NULL;
-                }
-                if($_POST['9th_stop_start']!=0){
-                    $startStop9th = $_POST['9th_stop_start'];
-                }
-                else{
-                    $startStop9th = NULL;
-                }
-                if($_POST['11th_stop_start']!=0){
-                    $startStop11th = $_POST['11th_stop_start'];
-                }
-                else{
-                    $startStop11th = NULL;
-                }
-                if($_POST['12th_stop_start']!=0){
-                    $startStop12th = $_POST['12th_stop_start'];
-                }
-                else{
-                    $startStop12th = NULL;
-                }
-                if($_POST['13th_stop_start']!=0){
-                    $startStop13th = $_POST['13th_stop_start'];
-                }
-                else{
-                    $startStop13th = NULL;
-                }
-                if($_POST['14th_stop_start']!=0){
-                    $startStop14th = $_POST['14th_stop_start'];
-                }
-                else{
-                    $startStop14th = NULL;
-                }
-                if($_POST['15th_stop_start']!=0){
-                    $startStop15th = $_POST['15th_stop_start'];
-                }
-                else{
-                    $startStop15th = NULL;
-                }
-                if($_POST['16th_stop_start']!=0){
-                    $startStop16th = $_POST['16th_stop_start'];
-                }
-                else{
-                    $startStop16th = NULL;
-                }
-                if($_POST['17th_stop_start']!=0){
-                    $startStop17th = $_POST['17th_stop_start'];
-                }
-                else{
-                    $startStop17th = NULL;
-                }
-                if($_POST['18th_stop_start']!=0){
-                    $startStop18th = $_POST['18th_stop_start'];
-                }
-                else{
-                    $startStop18th = NULL;
-                }
-                if($_POST['19th_stop_start']!=0){
-                    $startStop19th = $_POST['19th_stop_start'];
-                }
-                else{
-                    $startStop19th = NULL;
-                }
-                if($_POST['20th_stop_start']!=0){
-                    $startStop20th = $_POST['20th_stop_start'];
-                }
-                else{
-                    $startStop20th = NULL;
-                }
-                if($_POST['1st_stop_back']!=0){
-                    $backStop1st = $_POST['1st_stop_back'];
-                }
-                else{
-                    $backStop1st = NULL;
-                }
-                if($_POST['2nd_stop_back']!=0){
-                    $backStop2nd = $_POST['2nd_stop_back'];
-                }
-                else{
-                    $backStop2nd = NULL;
-                }
-                if($_POST['3rd_stop_back']!=0){
-                    $backStop3rd = $_POST['3rd_stop_back'];
-                }
-                else{
-                    $backStop3rd = NULL;
-                }
-                if($_POST['4th_stop_back']!=0){
-                    $backStop4th = $_POST['4th_stop_back'];
-                }
-                else{
-                    $backStop4th = NULL;
-                }
-                if($_POST['5th_stop_back']!=0){
-                    $backStop5th = $_POST['5th_stop_back'];
-                }
-                else{
-                    $backStop5th = NULL;
-                }
-                if($_POST['6th_stop_back']!=0){
-                    $backStop6th = $_POST['6th_stop_back'];
-                }
-                else{
-                    $backStop6th = NULL;
-                }
-                if($_POST['7th_stop_back']!=0){
-                    $backStop7th = $_POST['7th_stop_back'];
-                }
-                else{
-                    $backStop7th = NULL;
-                }
-                if($_POST['8th_stop_back']!=0){
-                    $backStop8th = $_POST['8th_stop_back'];
-                }
-                else{
-                    $backStop8th = NULL;
-                }
-                if($_POST['9th_stop_back']!=0){
-                    $backStop9th = $_POST['9th_stop_back'];
-                }
-                else{
-                    $backStop9th = NULL;
-                }
-                if($_POST['10th_stop_back']!=0){
-                    $backStop10th = $_POST['10th_stop_back'];
-                }
-                else{
-                    $backStop10th = NULL;
-                }
-                if($_POST['11th_stop_back']!=0){
-                    $backStop11th = $_POST['11th_stop_back'];
-                }
-                else{
-                    $backStop11th = NULL;
-                }
-                if($_POST['12th_stop_back']!=0){
-                    $backStop12th = $_POST['12th_stop_back'];
-                }
-                else{
-                    $backStop12th = NULL;
-                }
-                if($_POST['13th_stop_back']!=0){
-                    $backStop13th = $_POST['13th_stop_back'];
-                }
-                else{
-                    $backStop13th = NULL;
-                }
-                if($_POST['14th_stop_back']!=0){
-                    $backStop14th = $_POST['14th_stop_back'];
-                }
-                else{
-                    $backStop14th = NULL;
-                }
-                if($_POST['15th_stop_back']!=0){
-                    $backStop15th = $_POST['15th_stop_back'];
-                }
-                else{
-                    $backStop15th = NULL;
-                }
-                if($_POST['16th_stop_back']!=0){
-                    $backStop16th = $_POST['16th_stop_back'];
-                }
-                else{
-                    $backStop16th = NULL;
-                }
-                if($_POST['17th_stop_back']!=0){
-                    $backStop17th = $_POST['17th_stop_back'];
-                }
-                else{
-                    $backStop17th = NULL;
-                }
-                if($_POST['18th_stop_back']!=0){
-                    $backStop18th = $_POST['18th_stop_back'];
-                }
-                else{
-                    $backStop18th = NULL;
-                }
-                if($_POST['19th_stop_back']!=0){
-                    $backStop19th = $_POST['19th_stop_back'];
-                }
-                else{
-                    $backStop19th = NULL;
-                }
-                if($_POST['20th_stop_back']!=0){
-                    $backStop20th = $_POST['20th_stop_back'];
-                }
-                else{
-                    $backStop20th = NULL;
-                }
-
-                $stopUsedStart = array();
-                $stopUsedBack = array();
-
-                if (!empty($routeNumber) && !empty($startStop) && !empty($backStop)){
-                    array_push($stopUsedStart,$startStop,$startStop1st,$startStop2nd,$startStop3rd,$startStop4th,$startStop5th,$startStop6th,$startStop7th,$startStop8th,$startStop9th,$startStop10th,$startStop11th,$startStop12th,$startStop13th,$startStop14th,$startStop15th,$startStop16th,$startStop17th,$startStop18th,$startStop19th,$startStop20th);
-                    array_push($stopUsedBack,$backStop,$backStop1st,$backStop2nd,$backStop3rd,$backStop4th,$backStop5th,$backStop6th,$backStop7th,$backStop8th,$backStop9th,$backStop10th,$backStop11th,$backStop12th,$backStop13th,$backStop14th,$backStop15th,$backStop16th,$backStop17th,$backStop18th,$backStop19th,$backStop20th);
-                    $filterStart = array_filter($stopUsedStart);
-                    $filterBack = array_filter($stopUsedBack);
-                    
-
-                    if(count(array_unique($filterStart)) < count($filterStart)){
-                        echo "<script>alert('Multiple duplicate stop selected! Please select different bus stops!'</script>"; 
-                    }
-                    else if(count(array_unique($filterBack)) < count($filterBack)){
-                        echo "<script>alert('Multiple duplicate stop selected! Please select different bus stops!'</script>"; 
-                    }
-
-                    $temp = $db->isRouteExist($routeNumber);
-                    if ($temp){
-                        echo "<script>alert('Route already exist!')</script>"; 
-                    }
-    
-                    else{
-                        $route = $db->addNewRoute($routeNumber,$startStop,$backStop,$startStop1st,$startStop2nd,$startStop3rd,$startStop4th,$startStop5th,$startStop6th,$startStop7th,$startStop8th,$startStop9th,$startStop10th,$startStop11th,$startStop12th,$startStop13th,$startStop14th,$startStop15th,$startStop16th,$startStop17th,$startStop18th,$startStop19th,$startStop20th,$backStop1st,$backStop2nd,$backStop3rd,$backStop4th,$backStop5th,$backStop6th,$backStop7th,$backStop8th,$backStop9th,$backStop10th,$backStop11th,$backStop12th,$backStop13th,$backStop14th,$backStop15th,$backStop16th,$backStop17th,$backStop18th,$backStop19th,$backStop20th);
-    
-                        if ($route){
-                            echo "<script>alert('Successfully added route.')</script>";
-                            echo "<script type='text/javascript'>location.href = 'admin_view_route.php';</script>";
-                            
-                        }
-                    
-                        else 
-                        {
-                            echo "<script>alert('Unsuccessful to add route.')</script>"; 
-                            
-                        }
-                    }
-                    
-                    
-                }
-                else{
-                    echo "<script>alert('Unsuccessful to add route! Please fill in all the details!')</script>"; 
-                    
-                }
-                
-            }
-
-            else{
-                echo "<script>alert('Unsuccessful to add route.')</script>"; 
-            
-            }
-        }
     }
 ?>

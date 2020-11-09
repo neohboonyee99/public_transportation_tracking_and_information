@@ -1,15 +1,17 @@
 <?php
     require "DB_Functions.php";
+    require 'config.php';
     $db = new DB_Functions();
 
-    if(isset($_POST['submit_add_bus_stop'])){
-        if (isset($_POST['stop_name']) && isset($_POST['stop_latitude']) && isset($_POST['stop_longitude'])){
+    if( isset($_POST['submit_add_bus_stop']) ){
+        
+        if ( isset($_POST['stop_name']) && isset($_POST['stop_latitude']) && isset($_POST['stop_longitude']) ){
             $stopName = $_POST['stop_name'];
             $latitude = $_POST['stop_latitude'];
             $longitude = $_POST['stop_longitude'];
 
 
-            if (!empty($stopName) && !empty($latitude) && !empty($longitude)){
+            if ( !empty($stopName) && !empty($latitude) && !empty($longitude) ){
                 
                 $temp = $db->isStopExist($stopName);
 
@@ -65,7 +67,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="plugins/images/favicon.png">
     <!-- Custom CSS -->
-   <link href="css/style.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
    
 </head>
 
@@ -91,8 +93,10 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
                     <!-- toggle and nav items -->
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <h1 style="background-color: #2f323e;
+                            margin : 0px;
+                            color: #ffff;
+                            padding-left: 20px;">Track-IT</h1>
                 </div>
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                     <ul class="navbar-nav d-none d-md-block d-lg-none">
