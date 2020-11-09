@@ -45,7 +45,7 @@ class DB_Functions {
 
     //function to add new driver
     function addNewDriver($driverName,$driverIC,$driverBusRoute,$driverLoginId,$passwordHash,$busPlateNumber){
-        $stmt = $this->conn->prepare("INSERT INTO driver (driver_id, driver_password, driver_name,driver_ic,driver_bus_route,busPlateNumber) VALUES (?,?,?,?,?,?)");
+        $stmt = $this->conn->prepare("INSERT INTO driver (driver_id, driver_password, driver_name,driver_ic,driver_bus_route,bus_plate_number) VALUES (?,?,?,?,?,?)");
         $stmt->bind_param("sssiss",$driverLoginId,$passwordHash,$driverName,$driverIC,$driverBusRoute,$busPlateNumber);
         if($stmt->execute()){
             $stmt->close();
