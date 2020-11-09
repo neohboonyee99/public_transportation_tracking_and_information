@@ -739,5 +739,35 @@ class DB_Functions {
             return false;
         }
     }
+
+    //function to get bus by checking next stop
+    function getBusByNextStopByRouteNum($routeNumber, $stopName){
+        $stmt = $this->conn->prepare("SELECT * FROM bus WHERE next_stop = ?, bus_route_number=?");
+        $stmt->bind_param('ss',$stopName,$routeNumber);
+        $busDetails = array();
+
+        if($stmt->execute()){
+            $result = $stmt->get_result(); 
+            
+            if(mysqli_num_rows($result)>0){
+
+                while($row=mysqli_fetch_assoc($result)){
+                    $temp['latitude'] = $row['latitude'];
+                    $temp['longitude'] = $row['longitude'];
+                    $temp['route_number'] = $row['bus_route_number'];
+
+                    $busDetails[] = $temp;
+                    
+                }
+                $stmt->close();
+                return $busDetails;
+            }    
+        }
+
+        else{
+            $stmt->close();
+            return false;
+        }
+    }
 }
 ?>
