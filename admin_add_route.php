@@ -12,8 +12,6 @@
             $routeNumber = $_POST['bus_route_number'];
             $startStop = $_POST['start_stop'];
             $backStop = $_POST['back_stop'];
-        
-
             
             if( $_POST['1st_stop_start'] !="0"){
                 $startStop1st = $_POST['1st_stop_start'];

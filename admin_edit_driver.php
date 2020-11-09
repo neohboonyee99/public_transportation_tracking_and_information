@@ -1,13 +1,57 @@
 <?php
     require "DB_Functions.php";
     $db = new DB_Functions();
-    if (isset($_POST['submit_view_driver_details'])){
-        if (isset($_POST['driverName'])){
-            $driverName = $_POST['driverName'];
-            $driverDetails = $db->getDriverDetailsByName($driverName);
+    if(isset($_POST['submit_edit_driver'])){
+        if (isset($_POST['driver_name']) && isset($_POST['driver_ic']) && isset($_POST['driver_bus_route']) && isset($_POST['bus_plate_number'])){
+            $driverName = $_POST['driver_name'];
+            $driverIC = (int)$_POST['driver_ic'];
+            $driverBusRoute = $_POST['driver_bus_route'];
+            $busPlateNumber = $_POST['bus_plate_number'];
 
+            $icPattern = "/^[0-9]{12}$/";
+
+            if ( !empty($driverName) && !empty($driverIC) && !empty($driverBusRoute) && !empty($busPlateNumber)){
+                if(!preg_match($icPattern, $driverIC)){
+                    echo "<script>alert('Please enter IC Number in correct format! Please try again')</script>"; 
+                }
+
+
+                else{
+                    $driver = $db->editBusDriver($driverName,$driverIC,$driverBusRoute,$busPlateNumber);
+
+                    if ($driver){
+                        echo "<script>alert('Successfully edit driver details')</script>";
+                        echo "<script type='text/javascript'>location.href = 'admin_view_driver.php';</script>";
+                        
+                    }
+                
+                    else 
+                    {
+                        echo "<script>alert('Unsuccessful to edit driver details')</script>"; 
+                        
+                    }
+                    
+                }
+                
+            }
+            else{
+                echo "<script>alert('Unsuccessful to edit driver details! Please fill in all the details!')</script>"; 
+                
+            }
+            
         }
-        if ($driverDetails){
+        else{
+            echo "<script>alert('Unsuccessful to edit driver details')</script>"; 
+        
+        }
+    }
+    
+    if (isset($_POST['driverName'])){
+        $driverName = $_POST['driverName'];
+        $driverDetails = $db->getDriverDetailsByName($driverName);
+
+    }
+    if ($driverDetails){
 
 ?>
 <!DOCTYPE html>
@@ -237,50 +281,5 @@
 </html>
 <?php
         }
-        else if(isset($_POST['submit_edit_driver'])){
-            if (isset($_POST['driver_name']) && isset($_POST['driver_ic']) && isset($_POST['driver_bus_route']) && isset($_POST['bus_plate_number'])){
-                $driverName = $_POST['driver_name'];
-                $driverIC = (int)$_POST['driver_ic'];
-                $driverBusRoute = $_POST['driver_bus_route'];
-                $busPlateNumber = $_POST['bus_plate_number'];
-
-                $icPattern = "/^[0-9]{12}$/";
-
-                if ( !empty($driverName) && !empty($driverIC) && !empty($driverBusRoute) && !empty($busPlateNumber)){
-                    if(!preg_match($icPattern, $driverIC)){
-                        echo "<script>alert('Please enter IC Number in correct format! Please try again')</script>"; 
-                    }
-
-
-                    else{
-                        $driver = $db->editBusDriver($driverName,$driverIC,$driverBusRoute,$busPlateNumber);
-
-                        if ($driver){
-                            echo "<script>alert('Successfully edit driver details')</script>";
-                            echo "<script type='text/javascript'>location.href = 'admin_view_driver.php';</script>";
-                            
-                        }
-                    
-                        else 
-                        {
-                            echo "<script>alert('Unsuccessful to edit driver details')</script>"; 
-                            
-                        }
-                        
-                    }
-                    
-                }
-                else{
-                    echo "<script>alert('Unsuccessful to edit driver details! Please fill in all the details!')</script>"; 
-                    
-                }
-                
-            }
-            else{
-                echo "<script>alert('Unsuccessful to edit driver details')</script>"; 
-            
-            }
-        }
-    }
 ?>
 

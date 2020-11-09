@@ -10,16 +10,14 @@
             $delete = $db->deleteBusDriver($driverName);
 
             if($delete){
-                echo "<script>alert('Successful to delete bus driver!')";
+                echo "<script>alert('Successful to delete bus driver!')</script>";
             }
             else{
-                echo "<script>alert('Unsuccessful to delete bus driver!')";
-            
-                
+                echo "<script>alert('Unsuccessful to delete bus driver!')</script>";
             }
         }
         else{
-            echo "<script>alert('Unsuccessful to delete bus driver!')";
+            echo "<script>alert('Unsuccessful to delete bus driver!')</script>";
           
         }
         

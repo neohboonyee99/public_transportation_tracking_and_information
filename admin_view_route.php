@@ -5,8 +5,6 @@
     if (isset($_POST['btn_delete_route'])){
         if (isset($_POST['route_number'])){
             $routeNumber = $_POST['route_number'];
-            echo "<script>alert(".$routeNumber.")</script>";
-
             $delete = $db->deleteBusRoute($routeNumber);
 
             if($delete){
